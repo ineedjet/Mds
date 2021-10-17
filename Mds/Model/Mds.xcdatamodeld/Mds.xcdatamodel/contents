@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="MdsRecord" representedClassName="MdsRecordMO" syncable="YES" codeGenerationType="class">
+        <attribute name="durationInSeconds" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="fileSize" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="partNumber" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="recordId" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="serverId" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="urlString" attributeType="String" syncable="YES"/>
+        <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="MdsTrack" inverseName="records" inverseEntity="MdsTrack" syncable="YES"/>
+        <fetchIndex name="byTrackIdIndex">
+            <fetchIndexElement property="track" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="recordId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="MdsTrack" representedClassName="MdsTrackMO" syncable="YES" codeGenerationType="class">
+        <attribute name="author" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="durationInMinutes" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="longDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="station" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="trackId" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="records" toMany="YES" deletionRule="Nullify" destinationEntity="MdsRecord" inverseName="track" inverseEntity="MdsRecord" syncable="YES"/>
+        <fetchIndex name="byTrackIdIndex">
+            <fetchIndexElement property="trackId" type="Binary" order="ascending"/>
+        </fetchIndex>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="trackId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="MdsRecord" positionX="151.46484375" positionY="46.34765625" width="128" height="150"/>
+        <element name="MdsTrack" positionX="-63" positionY="-18" width="128" height="165"/>
+    </elements>
+</model>
